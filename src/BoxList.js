@@ -1,57 +1,39 @@
 import React, { Component } from "react";
-import { v4 as uuidv4 } from "uuid";
-import NewBoxForm from "./NewBoxForm.js";
-import Box from "./Box.js";
+import Box from "./Box";
+import NewBoxForm from "./NewBoxForm";
 
 class BoxList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      boxes: [
-        { width: 190, height: 120, boxColor: "purple", id: uuidv4() },
-        { width: 100, height: 100, boxColor: "yellow", id: uuidv4() },
-      ],
-    };
-    this.handleNewBox = this.handleNewBox.bind(this);
-    this.remove = this.remove.bind(this);
+    this.state = { boxes: [] };
+    this.create = this.create.bind(this);
   }
-
-  //menerima state box, object
-  remove(obj) {
-    this.setState((st) => {
-      return {
-        boxes: st.boxes.filter((box) => box.id !== obj.id),
-      };
+  remove(id) {
+    this.setState({
+      boxes: this.state.boxes.filter((box) => box.id !== id),
     });
   }
-
-  renderBoxes() {
-    return this.state.boxes.map((box) => (
-      <Box
-        key={box.id}
-        id={box.id}
-        height={`${box.height}px`}
-        width={`${box.width}px`}
-        boxColor={box.boxColor}
-        remove={this.remove}
-      />
-    ));
-  }
-
-  handleNewBox(obj) {
-    this.setState((st) => {
-      let newObj = { ...obj, id: uuidv4() };
-      return {
-        boxes: [...st.boxes, newObj],
-      };
+  create(newBox) {
+    this.setState({
+      boxes: [...this.state.boxes, newBox],
     });
   }
   render() {
+    const boxes = this.state.boxes.map((box) => (
+      <Box
+        key={box.id}
+        id={box.id}
+        width={box.width}
+        height={box.height}
+        color={box.color}
+        removeBox={() => this.remove(box.id)}
+      />
+    ));
     return (
-      <div className="BoxList">
-        <h1>Not Fancy Box Maker</h1>
-        <NewBoxForm newBox={this.handleNewBox} />
-        {this.renderBoxes()}
+      <div>
+        <h1>Color Box Maker Thingy</h1>
+        <NewBoxForm createBox={this.create} />
+        {boxes}
       </div>
     );
   }

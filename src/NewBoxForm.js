@@ -1,71 +1,64 @@
 import React, { Component } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 class NewBoxForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      width: "",
-      height: "",
-      boxColor: "",
-    };
+    this.state = { height: "", width: "", color: "" };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.newBox(this.state);
+  handleChange(evt) {
     this.setState({
-      width: "",
-      height: "",
-      boxColor: "",
+      [evt.target.name]: evt.target.value,
     });
   }
-  handleChange(e) {
+  handleSubmit(evt) {
+    evt.preventDefault();
+    const newBox = { ...this.state, id: uuidv4() };
+    this.props.createBox(newBox);
     this.setState({
-      [e.target.name]: e.target.value,
+      height: "",
+      width: "",
+      color: "",
     });
   }
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
-          <label htmlFor="width">Width:</label>
+          <label htmlFor="height">Height</label>
           <input
-            id="width"
-            name="width"
-            type="number"
-            value={this.state.width}
-            onChange={this.handleChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="height">Height:</label>
-          <input
-            id="height"
+            type="text"
             name="height"
-            type="number"
             value={this.state.height}
             onChange={this.handleChange}
+            id="height"
           />
         </div>
-
         <div>
-          <label htmlFor="boxColor">Box Color:</label>
+          <label htmlFor="width">Width</label>
           <input
-            id="boxColor"
-            name="boxColor"
             type="text"
-            value={this.state.boxColor}
+            name="width"
+            value={this.state.width}
             onChange={this.handleChange}
+            id="width"
           />
         </div>
-
-        <button>Create Box!!</button>
+        <div>
+          <label htmlFor="color">Color</label>
+          <input
+            type="text"
+            name="color"
+            value={this.state.color}
+            onChange={this.handleChange}
+            id="color"
+          />
+        </div>
+        <button>Add New Box!</button>
       </form>
     );
   }
 }
-
 export default NewBoxForm;
