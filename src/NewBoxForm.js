@@ -29,30 +29,39 @@ class NewBoxForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <label htmlFor="width">Width:</label>
-        <input
-          id="width"
-          name="width"
-          type="number"
-          value={this.state.width}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="height">Height:</label>
-        <input
-          id="height"
-          name="height"
-          type="number"
-          value={this.state.height}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="boxColor">Box Color:</label>
-        <input
-          id="boxColor"
-          name="boxColor"
-          type="text"
-          value={this.state.boxColor}
-          onChange={this.handleChange}
-        />
+        <div>
+          <label htmlFor="width">Width:</label>
+          <input
+            id="width"
+            name="width"
+            type="number"
+            value={this.state.width}
+            onChange={this.handleChange}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="height">Height:</label>
+          <input
+            id="height"
+            name="height"
+            type="number"
+            value={this.state.height}
+            onChange={this.handleChange}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="boxColor">Box Color:</label>
+          <input
+            id="boxColor"
+            name="boxColor"
+            type="text"
+            value={this.state.boxColor}
+            onChange={this.handleChange}
+          />
+        </div>
+
         <button>Create Box!!</button>
       </form>
     );

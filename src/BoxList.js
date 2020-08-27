@@ -25,14 +25,6 @@ class BoxList extends Component {
     });
   }
 
-  remove2(obj) {
-    this.setState((st) => {
-      return {
-        boxes: st.boxes.filter((box) => box.id !== obj.id),
-      };
-    });
-  }
-
   renderBoxes() {
     return this.state.boxes.map((box) => (
       <Box
