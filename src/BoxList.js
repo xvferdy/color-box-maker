@@ -7,6 +7,7 @@ class BoxList extends Component {
     super(props);
     this.state = { boxes: [] };
     this.create = this.create.bind(this);
+    this.remove = this.remove.bind(this);
   }
   remove(id) {
     this.setState({
@@ -18,6 +19,7 @@ class BoxList extends Component {
       boxes: [...this.state.boxes, newBox],
     });
   }
+
   render() {
     const boxes = this.state.boxes.map((box) => (
       <Box
@@ -26,7 +28,7 @@ class BoxList extends Component {
         width={box.width}
         height={box.height}
         color={box.color}
-        removeBox={() => this.remove(box.id)}
+        removeBox={this.remove}
       />
     ));
     return (

@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 
 class Box extends Component {
+  constructor(props) {
+    super(props);
+    this.handleRemoveBox = this.handleRemoveBox.bind(this);
+  }
+
+  handleRemoveBox() {
+    this.props.removeBox(this.props.id);
+
+    console.log(this.props.id);
+  }
   render() {
     return (
       <div>
@@ -11,7 +21,7 @@ class Box extends Component {
             backgroundColor: this.props.color,
           }}
         />
-        <button onClick={this.props.removeBox}>X</button>
+        <button onClick={this.handleRemoveBox}>X</button>
       </div>
     );
   }
