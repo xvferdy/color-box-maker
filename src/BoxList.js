@@ -13,15 +13,35 @@ class BoxList extends Component {
       ],
     };
     this.handleNewBox = this.handleNewBox.bind(this);
+    this.remove = this.remove.bind(this);
+  }
+
+  //menerima state box, object
+  remove(obj) {
+    this.setState((st) => {
+      return {
+        boxes: st.boxes.filter((box) => box.id !== obj.id),
+      };
+    });
+  }
+
+  remove2(obj) {
+    this.setState((st) => {
+      return {
+        boxes: st.boxes.filter((box) => box.id !== obj.id),
+      };
+    });
   }
 
   renderBoxes() {
     return this.state.boxes.map((box) => (
       <Box
         key={box.id}
+        id={box.id}
         height={`${box.height}px`}
         width={`${box.width}px`}
         boxColor={box.boxColor}
+        remove={this.remove}
       />
     ));
   }
